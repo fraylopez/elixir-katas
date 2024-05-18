@@ -11,7 +11,7 @@ defmodule Hangman do
   import String
 
   def guess(
-        %State{word: word, guessed: guessed},
+        %State{word: word, guessed: guessed} = state,
         letter
       ) do
     case guess(word, letter) do
@@ -22,10 +22,14 @@ defmodule Hangman do
         }
 
       {:bad_guess, _} ->
-        {
-          :bad_guess,
-          %State{word: word, guessed: guessed}
-        }
+        handle_bad_guess(state)
+    end
+  end
+
+  defp handle_bad_guess(%State{limbs: limbs} = state) do
+    case limbs do
+      1 -> {:game_over, %State{state | limbs: 0}}
+      _ -> {:bad_guess, %State{state | limbs: limbs - 1}}
     end
   end
 
