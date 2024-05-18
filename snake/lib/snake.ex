@@ -3,7 +3,18 @@ defmodule Snake do
     %{head: {x + 1, y}}
   end
 
-  def move_h(%{head: {x, y}, looking_towards: _looking_towards}) do
-    %{head: {1, 2}, looking_towards: :up}
+  def move_v(%{head: {x, y}, looking_towards: _looking_towards}) do
+    vector =
+      case _looking_towards do
+        :up -> {0, 1}
+        :down -> {0, -1}
+        :left -> {-1, 0}
+        :right -> {1, 0}
+      end
+
+    %{
+      head: {x + elem(vector, 0), y + elem(vector, 1)},
+      looking_towards: _looking_towards
+    }
   end
 end

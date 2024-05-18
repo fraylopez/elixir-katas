@@ -14,10 +14,16 @@ defmodule SnakeTest do
   end
 
   test "sxcvcdsfdsx" do
-    assert Snake.move_h(%{head: {1, 1}, looking_towards: :up}) ==
+    assert Snake.move_v(%{head: {1, 1}, looking_towards: :up}) ==
              %{
                head: {1, 2},
                looking_towards: :up
+             }
+
+    assert Snake.move_v(%{head: {2, 2}, looking_towards: :down}) ==
+             %{
+               head: {2, 1},
+               looking_towards: :down
              }
   end
 end
