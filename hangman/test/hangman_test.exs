@@ -16,6 +16,7 @@ defmodule HangmanTest do
 
   test "should handle a wrong guess" do
     assert Hangman.guess("nadar", "x") == {:bad_guess, "*****"}
+    assert Hangman.guess("nadar", "w") == {:bad_guess, "*****"}
   end
 
   test "should handle an invalid guess for a longer word" do
