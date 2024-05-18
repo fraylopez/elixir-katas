@@ -28,11 +28,7 @@ defmodule Hangman do
     |> String.split("")
     |> Enum.zip(String.split(guesses2, ""))
     |> Enum.map(fn {g1, g2} ->
-      if g1 == "*" do
-        g2
-      else
-        g1
-      end
+      if g1 == "*", do: g2, else: g1
     end)
     |> Enum.join()
   end
