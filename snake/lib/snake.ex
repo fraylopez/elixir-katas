@@ -16,15 +16,11 @@ defmodule Snake do
     }
   end
 
-  defp correct_turn(looking_towards, look_towards) do
-    case {looking_towards, look_towards} do
-      {:up, :down} -> :up
-      {:down, :up} -> :down
-      {:left, :right} -> :left
-      {:right, :left} -> :right
-      _ -> look_towards
-    end
-  end
+  defp correct_turn(:up, :down), do: :up
+  defp correct_turn(:down, :up), do: :down
+  defp correct_turn(:left, :right), do: :left
+  defp correct_turn(:right, :left), do: :right
+  defp correct_turn(_, look_towards), do: look_towards
 
   defp direction_to_vector(:up), do: {0, 1}
   defp direction_to_vector(:down), do: {0, -1}
