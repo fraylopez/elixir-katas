@@ -10,6 +10,10 @@ defmodule HangmanTest do
     assert Hangman.guess("nadar", "d") == {:ok, "**d**"}
   end
 
+  test "should handle n as good guess" do
+    assert Hangman.guess("nadar", "n") == {:ok, "n****"}
+  end
+
   test "should handle a wrong guess" do
     assert Hangman.guess("nadar", "x") == {:bad_guess, "*****"}
   end
