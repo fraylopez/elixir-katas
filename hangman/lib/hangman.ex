@@ -15,8 +15,26 @@ defmodule Hangman do
         letter
       ) do
     case guess(word, letter) do
-      {:ok, guessed} -> {:ok, %State{word: word, guessed: guessed}}
+      {:ok, updated_guessed} ->
+        {
+          :ok,
+          %State{word: word, guessed: merge_guesses(guessed, updated_guessed)}
+        }
     end
+  end
+
+  defp merge_guesses(guesses1, guesses2) do
+    guesses1
+    |> String.split("")
+    |> Enum.zip(String.split(guesses2, ""))
+    |> Enum.map(fn {g1, g2} ->
+      if g1 == "*" do
+        g2
+      else
+        g1
+      end
+    end)
+    |> Enum.join()
   end
 
   def guess(word, letter) do

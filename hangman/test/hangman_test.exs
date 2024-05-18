@@ -34,5 +34,15 @@ defmodule HangmanTest do
                 word: "nadar",
                 guessed: "n****"
               }}
+
+    assert Hangman.guess(
+             %State{word: "nadar", guessed: "n****"},
+             "d"
+           ) ==
+             {:ok,
+              %State{
+                word: "nadar",
+                guessed: "n*d**"
+              }}
   end
 end
