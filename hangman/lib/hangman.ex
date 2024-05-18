@@ -20,6 +20,12 @@ defmodule Hangman do
           :ok,
           %State{word: word, guessed: merge_guesses(guessed, updated_guessed)}
         }
+
+      {:bad_guess, _} ->
+        {
+          :bad_guess,
+          %State{word: word, guessed: guessed}
+        }
     end
   end
 

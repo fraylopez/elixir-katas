@@ -33,4 +33,14 @@ defmodule HangmanTest do
 
     assert guessed == "n*d**"
   end
+
+  test "should handle non first guess with a wrong guess" do
+    {:bad_guess, %{guessed: guessed}} =
+      Hangman.guess(
+        %State{word: "nadar", guessed: "n****"},
+        "x"
+      )
+
+    assert guessed == "n****"
+  end
 end
