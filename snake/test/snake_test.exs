@@ -40,4 +40,9 @@ defmodule SnakeTest do
     assert head == {1, 0}
     assert looking_towards == :down
   end
+
+  test "grid is size 10 spherical" do
+    %{head: head} = Snake.move(%State{head: {0, 0}, looking_towards: :down})
+    assert head == {0, 1}
+  end
 end
