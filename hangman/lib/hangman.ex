@@ -22,12 +22,12 @@ defmodule Hangman do
   defp bad_guess(word, _letter) do
     {:bad_guess,
      word
-     |> String.replace(~r/./, "*")}
+     |> replace(~r/./, "*")}
   end
 
   defp good_guess(word, letter) do
     {:ok,
      word
-     |> String.replace(~r/[^#{letter}]/, "*")}
+     |> replace(~r/[^#{letter}]/, "*")}
   end
 end
