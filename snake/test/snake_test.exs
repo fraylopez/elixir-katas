@@ -14,15 +14,18 @@ defmodule SnakeTest do
   end
 
   test "move towards look_towards" do
-    for test_case <- [{:up, {1, 2}}, {:right, {2, 1}}, {:down, {1, 0}}, {:left, {0, 1}}] do
-      look_towards = elem(test_case, 0)
-      expected_head = elem(test_case, 1)
+    %{head: head, looking_towards: looking_towards} =
+      Snake.move(%State{head: {1, 1}, looking_towards: :right}, :up)
 
-      %{head: head, looking_towards: looking_towards} =
-        Snake.move(%State{head: {1, 1}}, look_towards)
+    assert head == {1, 2}
+    assert looking_towards == :up
+  end
 
-      assert head == expected_head
-      assert looking_towards == look_towards
-    end
+  test "snake cannot turn 180" do
+    %{head: head, looking_towards: looking_towards} =
+      Snake.move(%State{head: {1, 1}, looking_towards: :up}, :down)
+
+    assert head == {1, 2}
+    assert looking_towards == :up
   end
 end

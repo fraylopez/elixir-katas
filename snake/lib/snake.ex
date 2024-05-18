@@ -3,15 +3,27 @@ defmodule Snake do
         %State{head: {x, y}, looking_towards: looking_towards},
         look_towards \\ nil
       ) do
+    look_towards = valid_turn?(looking_towards, look_towards || looking_towards)
+
     new_head =
-      (look_towards || looking_towards)
+      look_towards
       |> direction_to_vector()
       |> add({x, y})
 
     %{
       head: new_head,
-      looking_towards: look_towards || looking_towards
+      looking_towards: look_towards
     }
+  end
+
+  defp valid_turn?(looking_towards, look_towards) do
+    case {looking_towards, look_towards} do
+      {:up, :down} -> :up
+      {:down, :up} -> :down
+      {:left, :right} -> :left
+      {:right, :left} -> :right
+      _ -> look_towards
+    end
   end
 
   defp direction_to_vector(:up), do: {0, 1}
