@@ -2,9 +2,7 @@ defmodule Hangman do
   @moduledoc """
   Documentation for `Hangman`.
 
-  ## Examples
-      iex> Hangman.guess("hello", "h")
-      {:ok, "h****"}
+
 
   """
 
@@ -14,11 +12,11 @@ defmodule Hangman do
         %State{word: word, guessed: guessed} = state,
         letter
       ) do
-    case guess(word, letter) do
+    case reveal(word, letter) do
       {:ok, updated_guessed} ->
         {
           :ok,
-          %State{word: word, guessed: merge_guesses(guessed, updated_guessed)}
+          %State{state | guessed: merge_guesses(guessed, updated_guessed)}
         }
 
       {:bad_guess, _} ->
@@ -45,7 +43,7 @@ defmodule Hangman do
     if g1 == "*", do: g2, else: g1
   end
 
-  def guess(word, letter) do
+  defp reveal(word, letter) do
     word
     |> contains?(letter)
     |> case do
