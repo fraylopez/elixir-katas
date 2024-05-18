@@ -1,4 +1,5 @@
 defmodule HangmanTest do
+  alias Logger.Backends.Handler
   use ExUnit.Case
   doctest Hangman
 
@@ -21,5 +22,17 @@ defmodule HangmanTest do
 
   test "should handle an invalid guess for a longer word" do
     assert Hangman.guess("ahogarse", "x") == {:bad_guess, "********"}
+  end
+
+  test "should handle 2 guesses" do
+    assert Hangman.guess(
+             %State{word: "nadar", guessed: "*****"},
+             "n"
+           ) ==
+             {:ok,
+              %State{
+                word: "nadar",
+                guessed: "n****"
+              }}
   end
 end

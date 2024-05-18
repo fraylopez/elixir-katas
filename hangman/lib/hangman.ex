@@ -10,6 +10,15 @@ defmodule Hangman do
 
   import String
 
+  def guess(
+        %State{word: word, guessed: guessed},
+        letter
+      ) do
+    case guess(word, letter) do
+      {:ok, guessed} -> {:ok, %State{word: word, guessed: guessed}}
+    end
+  end
+
   def guess(word, letter) do
     word
     |> contains?(letter)
