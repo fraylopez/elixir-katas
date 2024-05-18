@@ -3,7 +3,7 @@ defmodule Snake do
         %State{head: {x, y}, looking_towards: looking_towards},
         look_towards \\ nil
       ) do
-    look_towards = valid_turn?(looking_towards, look_towards || looking_towards)
+    look_towards = correct_turn(looking_towards, look_towards || looking_towards)
 
     new_head =
       look_towards
@@ -16,7 +16,7 @@ defmodule Snake do
     }
   end
 
-  defp valid_turn?(looking_towards, look_towards) do
+  defp correct_turn(looking_towards, look_towards) do
     case {looking_towards, look_towards} do
       {:up, :down} -> :up
       {:down, :up} -> :down
