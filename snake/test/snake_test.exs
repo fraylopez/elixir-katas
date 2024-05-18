@@ -19,6 +19,12 @@ defmodule SnakeTest do
 
     assert head == {1, 2}
     assert looking_towards == :up
+
+    %{head: head, looking_towards: looking_towards} =
+      Snake.move(%State{head: {1, 1}, looking_towards: :right}, :down)
+
+    assert head == {1, 0}
+    assert looking_towards == :down
   end
 
   test "snake cannot turn 180" do
@@ -27,5 +33,11 @@ defmodule SnakeTest do
 
     assert head == {1, 2}
     assert looking_towards == :up
+
+    %{head: head, looking_towards: looking_towards} =
+      Snake.move(%State{head: {1, 1}, looking_towards: :down}, :up)
+
+    assert head == {1, 0}
+    assert looking_towards == :down
   end
 end
