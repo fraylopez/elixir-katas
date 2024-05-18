@@ -25,12 +25,14 @@ defmodule Hangman do
 
   defp merge_guesses(guesses1, guesses2) do
     guesses1
-    |> String.split("")
-    |> Enum.zip(String.split(guesses2, ""))
-    |> Enum.map(fn {g1, g2} ->
-      if g1 == "*", do: g2, else: g1
-    end)
+    |> split("")
+    |> Enum.zip(split(guesses2, ""))
+    |> Enum.map(&keep_hidden/1)
     |> Enum.join()
+  end
+
+  defp keep_hidden({g1, g2}) do
+    if g1 == "*", do: g2, else: g1
   end
 
   def guess(word, letter) do

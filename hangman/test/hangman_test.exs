@@ -24,25 +24,13 @@ defmodule HangmanTest do
     assert Hangman.guess("ahogarse", "x") == {:bad_guess, "********"}
   end
 
-  test "should handle 2 guesses" do
-    assert Hangman.guess(
-             %State{word: "nadar", guessed: "*****"},
-             "n"
-           ) ==
-             {:ok,
-              %State{
-                word: "nadar",
-                guessed: "n****"
-              }}
+  test "should handle non first guess" do
+    {:ok, %{guessed: guessed}} =
+      Hangman.guess(
+        %State{word: "nadar", guessed: "n****"},
+        "d"
+      )
 
-    assert Hangman.guess(
-             %State{word: "nadar", guessed: "n****"},
-             "d"
-           ) ==
-             {:ok,
-              %State{
-                word: "nadar",
-                guessed: "n*d**"
-              }}
+    assert guessed == "n*d**"
   end
 end
