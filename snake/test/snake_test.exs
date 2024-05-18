@@ -12,4 +12,12 @@ defmodule SnakeTest do
     %{head: head} = Snake.move(%State{head: {1, 1}, looking_towards: :left})
     assert head == {0, 1}
   end
+
+  test "change looking towards" do
+    %{head: head, looking_towards: looking_towards} =
+      Snake.move(%State{head: {1, 1}, looking_towards: :up}, :right)
+
+    assert head == {2, 1}
+    assert looking_towards == :right
+  end
 end

@@ -1,16 +1,18 @@
 defmodule Snake do
-  def move(%State{head: {x, y}, looking_towards: looking_towards}) do
-    vector =
-      case looking_towards do
-        :up -> {0, 1}
-        :down -> {0, -1}
-        :left -> {-1, 0}
-        :right -> {1, 0}
-      end
+  def move(
+        %State{head: {x, y}, looking_towards: looking_towards},
+        look_towards \\ nil
+      ) do
+    vector = direction_to_vector(look_towards || looking_towards)
 
     %{
       head: {x + elem(vector, 0), y + elem(vector, 1)},
-      looking_towards: looking_towards
+      looking_towards: look_towards || looking_towards
     }
   end
+
+  defp direction_to_vector(:up), do: {0, 1}
+  defp direction_to_vector(:down), do: {0, -1}
+  defp direction_to_vector(:left), do: {-1, 0}
+  defp direction_to_vector(:right), do: {1, 0}
 end
